@@ -1,0 +1,10 @@
+.done span {
+  color: #999999;
+  text-decoration: line-through;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
