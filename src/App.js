@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createActions } from 'redux/actions';
 import ToDo from 'components/ToDo';
+import './App.css';
+import './reset.css';
 
 function App() {
   const toDos = useSelector((state) => state);
@@ -67,48 +69,62 @@ function App() {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: '0, auto',
-      }}
-    >
-      <h1>To Do App</h1>
-      <form onSubmit={onSubmit}>
-        <input type='text' value={text} onChange={onChange} />
-        <button type='submit'>Add</button>
-      </form>
-      <br />
-      <div>
-        <button onClick={toggleAllList}>All</button>
-        <button onClick={toggleProgressList}>Progress</button>
-        <button onClick={toggleDoneList}>Done</button>
+    <div className='tooapp'>
+      <div className='todo-container'>
+        <h1 className='todo-header'>To Do App</h1>
+        <form className='todo-form' onSubmit={onSubmit}>
+          <input
+            className='todo-input'
+            type='text'
+            value={text}
+            onChange={onChange}
+            placeholder='Add your new todo'
+          />
+          <button className='todo-button' type='submit'>
+            Add
+          </button>
+        </form>
+        <br />
+        <div className='todo-filter-button-container'>
+          <button className='todo-filter-button' onClick={toggleAllList}>
+            All
+          </button>
+          <button className='todo-filter-button' onClick={toggleProgressList}>
+            Progress
+          </button>
+          <button className='todo-filter-button' onClick={toggleDoneList}>
+            Done
+          </button>
+        </div>
+        <ul>
+          {toggleAll && toDos.map((toDo) => <ToDo key={toDo.id} toDo={toDo} />)}
+          {toggleProgress &&
+            progressToDos.map((toDo) => <ToDo key={toDo.id} toDo={toDo} />)}
+          {toggleDone &&
+            doneToDos.map((toDo) => <ToDo key={toDo.id} toDo={toDo} />)}
+        </ul>
       </div>
-      <ul>
-        {toggleAll && toDos.map((toDo) => <ToDo key={toDo.id} toDo={toDo} />)}
-        {toggleProgress &&
-          progressToDos.map((toDo) => <ToDo key={toDo.id} toDo={toDo} />)}
-        {toggleDone &&
-          doneToDos.map((toDo) => <ToDo key={toDo.id} toDo={toDo} />)}
-      </ul>
       {toDos.length === 0 ? null : toggleAll ? (
-        <div>
-          <span>{`총: ${toDos.length}개`}</span>&nbsp;
-          <button onClick={handleDeleteAll}>Delete All</button>
+        <div className='todo-bottom-container'>
+          <span>{`All : ${toDos.length} tasks`}</span>&nbsp;
+          <button className='todo-bottom-button' onClick={handleDeleteAll}>
+            Clear All
+          </button>
         </div>
       ) : toggleProgress ? (
-        <div>
-          <span>{`진행중: ${progressToDos.length}개`}</span>&nbsp;
-          <button onClick={handleDeleteProgress}>Delete Progress</button>
+        <div className='todo-bottom-container'>
+          <span>{`In Progress: ${progressToDos.length} tasks`}</span>&nbsp;
+          <button className='todo-bottom-button' onClick={handleDeleteProgress}>
+            Clear
+          </button>
         </div>
       ) : (
         toggleDone && (
-          <div>
-            <span>{`완료: ${doneToDos.length}개`}</span>&nbsp;
-            <button onClick={handleDeleteDone}>Delete Done</button>
+          <div className='todo-bottom-container'>
+            <span>{`Done: ${doneToDos.length} tasks`}</span>&nbsp;
+            <button className='todo-bottom-button' onClick={handleDeleteDone}>
+              Clear
+            </button>
           </div>
         )
       )}

@@ -37,18 +37,37 @@ function ToDo({ toDo }) {
   return (
     <li>
       {isEdit ? (
-        <form onSubmit={handleEditButton}>
-          <input type='text' value={toDoState} onChange={handleEditInput} />
-          <button type='submit'>수정</button>
+        <form className='todo-contents' onSubmit={handleEditButton}>
+          <input
+            className='todo-contents-editinput'
+            type='text'
+            value={toDoState}
+            onChange={handleEditInput}
+          />
+          <button className='todo-contents-edit-button' type='submit'>
+            Edit
+          </button>
         </form>
       ) : (
         <>
-          <div className={toDo.done ? 'done' : null}>
-            <input type='checkbox' onChange={handleDone} checked={toDo.done} />
-            <span>{toDo.text}</span>
-            &nbsp;
-            <button onClick={handleEdit}>🖍</button>
-            <button onClick={handleDelete}>❌</button>
+          <div className={toDo.done ? 'done' : 'todo-contents'}>
+            <div className='todo-contents-container'>
+              <input
+                className='todo-contents-checkbox'
+                type='checkbox'
+                onChange={handleDone}
+                checked={toDo.done}
+              />
+              <span>{toDo.text}</span>
+            </div>
+            <div>
+              <button className='todo-contents-button' onClick={handleEdit}>
+                🖍
+              </button>
+              <button className='todo-contents-button' onClick={handleDelete}>
+                ❌
+              </button>
+            </div>
           </div>
         </>
       )}

@@ -1,10 +1,58 @@
+.todo-contents,
+.done {
+  width: 300px;
+  padding: 0 1rem;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-contents-container {
+  display: flex;
+  align-items: center;
+  max-width: 205px;
+}
+
+.todo-contents-checkbox {
+  margin-right: 8px;
+}
+
 .done span {
   color: #999999;
   text-decoration: line-through;
 }
 
-ol,
-ul {
+.todo-contents-editinput {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 220px;
+  height: 25px;
+}
+
+.todo-contents-edit-button {
+  width: 40px;
+  height: 25px;
   padding: 0;
-  list-style: none;
+  border: 0;
+  outline: 0;
+  background: #a469f0;
+  border-radius: 2px;
+  color: white;
+  font-size: 12px;
+}
+
+.todo-contents-button {
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: #a469f0;
+  border-radius: 2px;
+  color: white;
+  font-size: 12px;
+}
+
+.todo-contents-button:first-child {
+  margin-right: 5px;
 }
