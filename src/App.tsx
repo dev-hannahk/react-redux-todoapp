@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { rootReducerType } from './redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { createActions } from 'redux/actions';
-import ToDo from 'components/ToDo';
+import { createActions } from './redux/actions';
+import ToDo from './components/ToDo';
 import './App.css';
 import './reset.css';
 
 function App() {
-  const toDos = useSelector((state) => state);
-  const progressToDos = useSelector((todo) =>
+  const toDos = useSelector((state: rootReducerType) => state);
+  const progressToDos = useSelector((todo: rootReducerType) =>
     todo.filter((todo) => todo.done === false)
   );
-  const doneToDos = useSelector((todo) =>
+  const doneToDos = useSelector((todo: rootReducerType) =>
     todo.filter((todo) => todo.done === true)
   );
   const dispatch = useDispatch();
@@ -19,12 +20,12 @@ function App() {
   const [toggleProgress, setToggleProgress] = useState(false);
   const [toggleDone, setToggleDone] = useState(false);
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setText(value);
   };
 
-  const onSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (text.length === 0) {
       alert('Error');
@@ -72,7 +73,7 @@ function App() {
     <div className='tooapp'>
       <div className='todo-container'>
         <h1 className='todo-header'>To Do App</h1>
-        <form className='todo-form' onSubmit={onSubmit}>
+        <form className='todo-form' onSubmit={handleSubmit}>
           <input
             className='todo-input'
             type='text'

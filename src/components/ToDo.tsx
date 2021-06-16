@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createActions } from 'redux/actions';
+import { createActions } from '../redux/actions';
+import { Todo } from '../redux/types';
 import './ToDo.css';
 
-function ToDo({ toDo }) {
+type TodoProps = {
+  toDo: Todo;
+};
+
+function ToDo({ toDo }: TodoProps) {
   const [isEdit, setIsEdit] = useState(false);
   const [toDoState, setToDoState] = useState(toDo.text);
   const dispatch = useDispatch();
@@ -17,7 +22,7 @@ function ToDo({ toDo }) {
     dispatch(createActions.deleteToDo(id));
   };
 
-  const handleEditInput = (e) => {
+  const handleEditInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setToDoState(value);
   };
@@ -28,7 +33,7 @@ function ToDo({ toDo }) {
     dispatch(createActions.editToDo(id, toDoState));
   };
 
-  const handleDone = (e) => {
+  const handleDone = () => {
     const id = toDo.id;
     const done = toDo.done;
     dispatch(createActions.doneToDo(id, done));

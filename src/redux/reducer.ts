@@ -1,20 +1,24 @@
-const LOAD = 'LOAD';
-const ADD = 'ADD';
-const EDIT = 'EDIT';
-const DONE = 'DONE';
-const DELETE = 'DELETE';
-const DELETE_PROGRESS = 'DELETE_PROGRESS';
-const DELETE_DONE = 'DELETE_DONE';
-const DELETE_ALL = 'DELETE_ALL';
+import {
+  Todo,
+  LOAD,
+  ADD,
+  EDIT,
+  DONE,
+  DELETE,
+  DELETE_PROGRESS,
+  DELETE_DONE,
+  DELETE_ALL,
+  TodoDispatch,
+} from './types';
 
-const setPersist = (toDos) => {
+const setPersist = (toDos: Todo[]) => {
   window.localStorage.setItem('toDos', JSON.stringify(toDos));
 };
 
-export const reducer = (state = [], action) => {
+export const reducer = (state: Todo[] = [], action: TodoDispatch): Todo[] => {
   switch (action.type) {
     case LOAD:
-      return JSON.parse(localStorage.getItem('toDos')) || [];
+      return JSON.parse(localStorage.getItem('toDos') || '') || [];
 
     case ADD:
       const toDoObj = {
@@ -55,7 +59,7 @@ export const reducer = (state = [], action) => {
       return delDone;
 
     case DELETE_ALL:
-      const delAll = [];
+      const delAll: [] = [];
       setPersist(delAll);
       return delAll;
 

@@ -4,4 +4,6 @@ import { reducer } from './reducer';
 
 const store = createStore(reducer, composeWithDevTools());
 
+export type rootReducerType = ReturnType<typeof reducer>;
+
 export default store;
